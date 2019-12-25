@@ -9,9 +9,7 @@ import scalapb.descriptors._
 object ScalapbJsonCommon {
   def unsignedInt(n: Int): Long = n & 0X00000000FFFFFFFFL
 
-  type GenericCompanion = GeneratedMessageCompanion[T] forSome {
-    type T <: GeneratedMessage with Message[T]
-  }
+  type GenericCompanion = GeneratedMessageCompanion[_]
 
   private[this] val PIntDefault = PInt(0)
   private[this] val PLongDefault = PLong(0L)
