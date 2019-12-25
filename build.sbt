@@ -71,6 +71,7 @@ lazy val core = crossProject(JVMPlatform, JSPlatform)
     scalapropsCoreSettings,
     libraryDependencies += "com.github.scalaprops" %%% "scalaprops" % "0.6.3" % "test",
     libraryDependencies += "org.scalatest" %%% "scalatest" % scalatestVersion % "test",
+    libraryDependencies := libraryDependencies.value.map(_.withDottyCompat(scalaVersion.value)),
   )
   .platformsSettings(JSPlatform)(
     PB.targets in Test := Seq(
@@ -131,7 +132,7 @@ noPublish
 lazy val commonSettings = Def.settings(
   scalapbV := scalapbVersion,
   unmanagedResources in Compile += (baseDirectory in LocalRootProject).value / "LICENSE.txt",
-  scalaVersion := Scala212,
+  scalaVersion := "0.22.0-RC1",
   crossScalaVersions := Seq(Scala212, Scala213),
   scalacOptions ++= unusedWarnings,
   Seq(Compile, Test).flatMap(c => scalacOptions in (c, console) --= unusedWarnings),
